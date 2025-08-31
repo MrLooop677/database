@@ -1,3 +1,5 @@
+CREATE DATABASE assisgment
+USE assisgment
 -- 1. Create a table named "Employees" with columns for ID (integer), Name (varchar), and Salary (decimal)
 CREATE TABLE Employees (
     ID INT,
@@ -12,7 +14,7 @@ ALTER TABLE Employees ADD Department VARCHAR(50);
 ALTER TABLE Employees DROP COLUMN Salary;
 
 -- 4. Rename the "Department" column in the "Employees" table to "DeptName"
-ALTER TABLE Employees RENAME COLUMN Department TO DeptName;
+EXEC sp_rename 'Employees.Department', 'DeptName', 'COLUMN';
 
 -- 5. Create a new table called "Projects" with columns for ProjectID (integer) and ProjectName (varchar)
 CREATE TABLE Projects (
@@ -21,8 +23,10 @@ CREATE TABLE Projects (
 );
 
 -- 6. Add a primary key constraint to the "Employees" table for the "ID" column
-ALTER TABLE Employees ADD CONSTRAINT PK_Employees PRIMARY KEY (ID);
-
+ALTER TABLE Employees
+ALTER COLUMN ID INT NOT NULL;
+ALTER TABLE Employees
+ADD CONSTRAINT PK_Employees PRIMARY KEY (ID);
 -- 7. Add a unique constraint to the "Name" column in the "Employees" table
 ALTER TABLE Employees ADD CONSTRAINT UQ_Employees_Name UNIQUE (Name);
 
